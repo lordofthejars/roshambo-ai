@@ -1,10 +1,6 @@
 # Rock Paper Scissors Game
 
-![AI Build](https://github.com/redhat-developer-demos/rps-game/actions/workflows/build.ai.yaml/badge.svg)
-![Backend Build](https://github.com/redhat-developer-demos/rps-game/actions/workflows/build.backend.yaml/badge.svg)
-![Frontend Build](https://github.com/redhat-developer-demos/rps-game/actions/workflows/build.frontend.yaml/badge.svg)
 
-Welcome to the Rock Paper Scissors game powered by [Red Hat OpenShift AI](https://red.ht/openshift_ai)! :rocket:
 
 This game uses a Quarkus backend and a React frontend. The game integrates machine learning models to process your move, giving it a modern twist to the classic game! 
 
