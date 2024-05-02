@@ -9,12 +9,14 @@ import ai.djl.modality.cv.ImageFactory;
 import ai.djl.translate.TranslateException;
 
 import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
+@Singleton
 @Path("/")
 public class RoshamboPredictionResource {
 

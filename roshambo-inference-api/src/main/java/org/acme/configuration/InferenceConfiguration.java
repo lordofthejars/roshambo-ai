@@ -13,6 +13,7 @@ import ai.djl.repository.zoo.ZooModel;
 import ai.djl.training.util.ProgressBar;
 import ai.djl.translate.Translator;
 
+import io.quarkus.runtime.Startup;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
@@ -38,7 +39,18 @@ public class InferenceConfiguration {
         return ImageFactory.getInstance();
     }
 
-    @Produces
+    private ZooModel<Image, Classifications> zooModel;
+
+    @Startup
+    public void initializeModel() throws ModelNotFoundException, MalformedModelException, IOException {
+
+        final Translator<Image, Classifications> translator = getTranslator();
+        final Criteria<Image, Classifications> criteria = getCriteria(translator);
+        this.zooModel = criteria.loadModel();
+
+    }
+
+    //@Produces
     public Translator<Image, Classifications> getTranslator() {
         return
             ImageClassificationTranslator.builder()
@@ -47,7 +59,7 @@ public class InferenceConfiguration {
                 .build();
     }
 
-    @Produces
+    //@Produces
     Criteria<Image, Classifications> getCriteria(Translator<Image, Classifications> translator) {
 
         System.out.println("Create Criteria");
@@ -77,9 +89,8 @@ public class InferenceConfiguration {
     }
 
     @Produces
-    ZooModel<Image, Classifications> getZooModel(Criteria<Image, Classifications> criteria)
-        throws ModelNotFoundException, MalformedModelException, IOException {
-        return criteria.loadModel();
+    ZooModel<Image, Classifications> getZooModel() {
+        return this.zooModel;
     }
 
     @Produces
